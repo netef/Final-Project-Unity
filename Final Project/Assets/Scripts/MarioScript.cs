@@ -9,6 +9,7 @@ public class MarioScript : MonoBehaviour
     public bool isGrounded;
     bool facingRight;
     public Animator anim;
+    float horizontalSpeed;
 
     void Start()
     {
@@ -21,7 +22,12 @@ public class MarioScript : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.right * Time.deltaTime * speed * Input.GetAxis("Horizontal"));
-        anim.SetFloat("speed", rb.velocity.x);
+
+        //run idle transitions
+        horizontalSpeed = Input.GetAxis("Horizontal");
+        //square is always above 0
+        anim.SetFloat("speed", horizontalSpeed * horizontalSpeed);
+
 
         if (Input.GetAxis("Horizontal") < 0 && facingRight)
         {
@@ -33,12 +39,6 @@ public class MarioScript : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
             facingRight = true;
         }
-
-        if (Input.GetAxis("Horizontal") != 0)
-            anim.SetTrigger("run");
-        
-        else
-            anim.SetTrigger("idle");
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {

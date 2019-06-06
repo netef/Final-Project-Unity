@@ -5,7 +5,9 @@ using UnityEngine;
 public class GroundCheckScript : MonoBehaviour
 {
     public GameObject mario;
-   
+    float m_HorizontalMovement;
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("ground"))
