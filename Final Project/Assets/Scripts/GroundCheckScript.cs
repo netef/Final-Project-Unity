@@ -4,34 +4,22 @@ using UnityEngine;
 
 public class GroundCheckScript : MonoBehaviour
 {
-    public GameObject mario;
-    float m_HorizontalMovement;
+    GameObject mario;
 
+    private void Start()
+    {
+        mario = gameObject.transform.parent.gameObject;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("ground"))
-        {
-            mario.GetComponent<MarioScript>().isGrounded = true;
-            mario.GetComponent<MarioScript>().anim.SetTrigger("grounded");
-        }     
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("ground"))
-        {
-            mario.GetComponent<MarioScript>().isGrounded = true;
-        }
+            mario.GetComponent<MarioScript>().isGrounded = true;            
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
-        {
-            mario.GetComponent<MarioScript>().isGrounded = false;
-            mario.GetComponent<MarioScript>().anim.ResetTrigger("grounded");
-            mario.GetComponent<MarioScript>().anim.SetTrigger("jump");
-        }
+        //if (collision.gameObject.CompareTag("ground"))
+           // mario.GetComponent<MarioScript>().isGrounded = false; 
     }
 }

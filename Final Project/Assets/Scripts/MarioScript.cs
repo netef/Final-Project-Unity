@@ -27,22 +27,25 @@ public class MarioScript : MonoBehaviour
         horizontalSpeed = Input.GetAxis("Horizontal");
         //square is always above 0
         anim.SetFloat("speed", horizontalSpeed * horizontalSpeed);
+        anim.SetBool("Ground", isGrounded);
 
 
         if (Input.GetAxis("Horizontal") < 0 && facingRight)
         {
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
             facingRight = false;
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);    
         }
         else if(Input.GetAxis("Horizontal") > 0 && !facingRight)
         {
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
             facingRight = true;
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);        
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.AddForce(new Vector2(0, 2000));
+            rb.AddForce(new Vector2(0, 30), ForceMode2D.Impulse);
+            anim.SetTrigger("jump");
+            isGrounded = false;
         }
     }
 }
