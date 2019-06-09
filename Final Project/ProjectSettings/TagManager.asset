@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ground
   - head
+  - mushroom
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,8 @@ public class MarioScript : MonoBehaviour
     bool facingRight;
     Animator anim;
     float horizontalSpeed;
+    bool grow;
+    int counter;
 
     void Start()
     {
@@ -17,6 +19,8 @@ public class MarioScript : MonoBehaviour
         anim = GetComponent<Animator>();
         isGrounded = true;
         facingRight = true;
+        grow = false;
+        counter = 0;
     }
 
     void Update()
@@ -45,8 +49,31 @@ public class MarioScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(new Vector2(0, 30), ForceMode2D.Impulse);
-            anim.SetTrigger("jump");
             isGrounded = false;
+        }
+
+        if (grow)
+        {
+            transform.localScale *= 1.01f;
+            counter++;
+            if (counter == 50)
+            {
+                counter = 0;
+                grow = false;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("mushroom"))
+        {
+            if(PlayerPrefs.GetInt("isBig", 0) == 0)
+            {
+                grow = true;
+                PlayerPrefs.SetInt("isBig", 1);
+            }
+            Destroy(collision.gameObject);  
         }
     }
 }
