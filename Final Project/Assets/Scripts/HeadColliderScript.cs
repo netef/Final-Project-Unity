@@ -7,6 +7,7 @@ public class HeadColliderScript : MonoBehaviour
     public GameObject coin;
     public GameObject mushroom;
     public GameObject flower;
+    public Sprite sprite;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -31,6 +32,8 @@ public class HeadColliderScript : MonoBehaviour
                         Instantiate(flower, collision.gameObject.transform.position, Quaternion.identity);
                     }
                     Instantiate(mushroom, collision.gameObject.transform.position, Quaternion.identity);
+                    collision.gameObject.tag = "hit";
+                    collision.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
                     break;
                 }
         }
