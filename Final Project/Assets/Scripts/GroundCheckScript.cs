@@ -13,7 +13,7 @@ public class GroundCheckScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("hit"))
             mario.GetComponent<MarioScript>().isGrounded = true;            
     }
 }
