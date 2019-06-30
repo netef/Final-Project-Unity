@@ -221,6 +221,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e843b181adfa2f469cefa3126696d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &768579853
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7512036374512732048, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_Name
+      value: BrickQuestion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.113691
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.8208747
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 998ecc811e1a62647b05b90f59b44913, type: 3}
 --- !u!1 &1011911996
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +373,7 @@ Transform:
   - {fileID: 1543362073}
   - {fileID: 1774925610}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1011911999
 Rigidbody2D:
@@ -356,6 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  fireBall: {fileID: 0}
   isGrounded: 0
 --- !u!95 &1011912002
 Animator:
@@ -488,7 +558,7 @@ Transform:
   m_Children:
   - {fileID: 2045828861}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1774925609
 GameObject:
@@ -553,7 +623,7 @@ MonoBehaviour:
   coin: {fileID: 7184025696141683458, guid: fd422618272a90c4dae86027502253fb, type: 3}
   mushroom: {fileID: 9186501277532622525, guid: d0371e9130c6c5f44b2876f388ac0161,
     type: 3}
-  flower: {fileID: 9186501277532622525, guid: d0371e9130c6c5f44b2876f388ac0161, type: 3}
+  flower: {fileID: 6572835895522947796, guid: 238105b0d888d1d42a9c914ffc631d53, type: 3}
   sprite: {fileID: 21300006, guid: 7068338de2616844789f6b9e960b4c62, type: 3}
 --- !u!1 &2045828860
 GameObject:

@@ -5,15 +5,19 @@ using UnityEngine;
 public class GroundCheckScript : MonoBehaviour
 {
     GameObject mario;
-
-    private void Start()
+    void Start()
     {
         mario = gameObject.transform.parent.gameObject;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("hit"))
-            mario.GetComponent<MarioScript>().isGrounded = true;            
+            mario.GetComponent<MarioScript>().isGrounded = true;
+        else if (collision.gameObject.CompareTag("enemy"))
+        {
+            //add enemy death animation
+            Destroy(collision.gameObject);
+        }
     }
 }

@@ -9,6 +9,8 @@ TagManager:
   - mushroom
   - question
   - hit
+  - enemy
+  - flower
   layers:
   - Default
   - TransparentFX
