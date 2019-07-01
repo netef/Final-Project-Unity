@@ -102,7 +102,8 @@ public class MarioScript : MonoBehaviour
             PlayerPrefs.SetInt("powerUp", 2);
             Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.CompareTag("enemy"))
+        else if (collision.gameObject.CompareTag("enemy") ||
+            collision.gameObject.CompareTag("kill"))
         {
             if (PlayerPrefs.GetInt("powerUp", 0) == 0)
             {

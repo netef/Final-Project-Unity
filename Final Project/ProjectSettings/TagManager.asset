@@ -11,6 +11,7 @@ TagManager:
   - hit
   - enemy
   - flower
+  - kill
   layers:
   - Default
   - TransparentFX

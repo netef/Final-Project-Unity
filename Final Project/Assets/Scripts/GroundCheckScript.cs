@@ -14,10 +14,11 @@ public class GroundCheckScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("hit"))
             mario.GetComponent<MarioScript>().isGrounded = true;
-        else if (collision.gameObject.CompareTag("enemy"))
+        else if (collision.gameObject.CompareTag("enemy") && mario.GetComponent<MarioScript>().isGrounded == false)
         {
+            mario.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 40, ForceMode2D.Impulse);
             //add enemy death animation
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
     }
 }

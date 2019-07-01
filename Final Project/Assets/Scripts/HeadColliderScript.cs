@@ -27,10 +27,11 @@ public class HeadColliderScript : MonoBehaviour
 
             case "question":
                 {
+                    Vector3 location = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y + 1, collision.gameObject.transform.position.z);
                     if (PlayerPrefs.GetInt("powerUp", 0) == 1)
-                        Instantiate(flower, collision.gameObject.transform.position, Quaternion.identity);
+                        Instantiate(flower, location, Quaternion.identity);
                     else
-                        Instantiate(mushroom, collision.gameObject.transform.position, Quaternion.identity);
+                        Instantiate(mushroom, location, Quaternion.identity);
 
                     collision.gameObject.tag = "hit";
                     collision.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;

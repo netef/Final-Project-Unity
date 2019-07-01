@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8985682713931010497}
   - component: {fileID: 8122227860077911437}
   - component: {fileID: 8114444523453623366}
-  - component: {fileID: 427939150482237605}
+  - component: {fileID: 7863334447912850421}
   m_Layer: 0
   m_Name: Flower
   m_TagString: flower
@@ -119,7 +119,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &427939150482237605
+--- !u!114 &7863334447912850421
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,6 +128,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6572835895522947796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b0a9ba650522443a45fa87dfc5e87a, type: 3}
+  m_Script: {fileID: 11500000, guid: a4035f5a0075a8f4db0795a5ee2b1f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
