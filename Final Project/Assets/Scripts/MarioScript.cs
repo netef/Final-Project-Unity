@@ -15,12 +15,13 @@ public class MarioScript : MonoBehaviour
     int counter;
     SpriteRenderer renderer;
     Vector2 movement;
+    Vector2 rayPosition;
     GameObject mario;
 
 
     void Start()
     {
-        rb = gameObject.GetComponentInParent<Rigidbody2D>();
+
         anim = GetComponent<Animator>();
         isGrounded = true;
         facingRight = true;
@@ -31,6 +32,7 @@ public class MarioScript : MonoBehaviour
         counter = 0;
         renderer = GetComponent<SpriteRenderer>();
         mario = gameObject.transform.parent.gameObject;
+        rb = mario.GetComponent<Rigidbody2D>();
         PlayerPrefs.SetInt("powerUp", 0);
     }
 
@@ -74,13 +76,29 @@ public class MarioScript : MonoBehaviour
         }
 
         if (!canHit)
-            renderer.enabled = !renderer.enabled;    
+            renderer.enabled = !renderer.enabled;
     }
 
     void FixedUpdate()
     {
-        mario.transform.Translate(Vector3.right * Time.deltaTime * speed * Input.GetAxis("Horizontal"));
+        if (PlayerPrefs.GetInt("powerUp", 0) == 0)
+            rayPosition = new Vector2(transform.position.x, transform.position.y - 0.8f);
+        else
+            rayPosition = new Vector2(transform.position.x, transform.position.y - 1.6f);
 
+        RaycastHit2D hit = Physics2D.Raycast(rayPosition, Vector2.down, 0.2f);
+        if (hit)
+        {
+            if (hit.transform.CompareTag("ground") || hit.transform.CompareTag("hit"))
+                isGrounded = true;
+            else
+                isGrounded = false;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+        rb.velocity = new Vector2(horizontalSpeed * speed, rb.velocity.y);
         //Moves the player and handles looking direction
         if (Input.GetAxis("Horizontal") < 0 && facingRight)
         {
@@ -92,8 +110,6 @@ public class MarioScript : MonoBehaviour
             facingRight = true;
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
-
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

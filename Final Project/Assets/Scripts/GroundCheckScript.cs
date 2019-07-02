@@ -9,9 +9,9 @@ public class GroundCheckScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("hit"))
+        /*if (collision.gameObject.CompareTag("ground") || collision.gameObject.CompareTag("hit"))
             body.GetComponent<MarioScript>().isGrounded = true;
-        else if (collision.gameObject.CompareTag("enemy") &&
+        else*/ if (collision.gameObject.CompareTag("enemy") &&
             body.GetComponent<MarioScript>().isGrounded == false)
         {
             mario.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 30, ForceMode2D.Impulse);
