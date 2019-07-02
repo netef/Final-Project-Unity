@@ -6,24 +6,24 @@ public class GoombaScript : MonoBehaviour
 {
     int speed;
     bool right;
+    bool alive;
     Rigidbody2D rb;
     void Start()
     {
         speed = 3;
         right = false;
+        alive = true;
         rb = GetComponent<Rigidbody2D>();
     }
 
-
-    void Update()
+    void FixedUpdate()
     {
-        if (right)
+        if (alive)
         {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            if (right)
+                rb.velocity = new Vector2(speed, rb.velocity.y);
+            else
+                rb.velocity = new Vector2(-speed, rb.velocity.y);
         }
     }
 

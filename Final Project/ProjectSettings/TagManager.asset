@@ -12,6 +12,8 @@ TagManager:
   - enemy
   - flower
   - kill
+  - wall
+  - groundcheck
   layers:
   - Default
   - TransparentFX
