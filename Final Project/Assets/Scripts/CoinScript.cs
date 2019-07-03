@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         transform.Rotate(Vector3.up * Time.deltaTime * 180);
@@ -16,7 +11,11 @@ public class CoinScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-            Destroy(gameObject);
+        if (collision.gameObject.CompareTag("Player") && GetComponent<SpriteRenderer>().enabled)
+        {
+            GetComponent<AudioSource>().Play();
+            GetComponent<SpriteRenderer>().enabled = false;
+            Destroy(gameObject, GetComponent<AudioSource>().clip.length);
+        }        
     }
 }
