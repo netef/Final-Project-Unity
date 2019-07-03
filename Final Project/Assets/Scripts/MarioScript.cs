@@ -82,17 +82,23 @@ public class MarioScript : MonoBehaviour
     void FixedUpdate()
     {
         if (PlayerPrefs.GetInt("powerUp", 0) == 0)
-            rayPosition = new Vector2(transform.position.x, transform.position.y - 0.8f);
+            rayPosition = new Vector2(transform.position.x, transform.position.y - 1f);
         else
-            rayPosition = new Vector2(transform.position.x, transform.position.y - 1.6f);
+            rayPosition = new Vector2(transform.position.x, transform.position.y - 2.5f);
 
         RaycastHit2D hit = Physics2D.Raycast(rayPosition, Vector2.down, 0.2f);
         if (hit)
         {
             if (hit.transform.CompareTag("ground") || hit.transform.CompareTag("hit"))
                 isGrounded = true;
-            else
-                isGrounded = false;
+            else if (hit.transform.CompareTag("enemy"))
+            {
+                rb.AddForce(Vector2.up * 30, ForceMode2D.Impulse);
+                hit.transform.gameObject.GetComponent<Collider2D>().enabled = false;
+                hit.transform.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 20000, ForceMode2D.Impulse);
+                hit.transform.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
+                Destroy(hit.transform.gameObject, 4);
+            }
         }
         else
         {
