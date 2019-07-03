@@ -11,29 +11,37 @@ public class MarioScriptNew : MonoBehaviour
     public float killPower;
     Animator anim;
     Rigidbody2D rb;
+    SpriteRenderer renderer;
     float direction;
-    bool facingRight;
+    bool facingRight, wasHit;
 
 
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        renderer = GetComponent<SpriteRenderer>();
         direction = 0;
         facingRight = true;
+        wasHit = false;
     }
 
     void Update()
     {
-        //sets ground animation
-        anim.SetBool("Ground", IsGrounded());
-
         //saves the direction of the input horizontally
         direction = Input.GetAxisRaw("Horizontal");
+
+        //sets ground animation
+        anim.SetBool("Ground", IsGrounded());
+        //changes running and idle animations
+        anim.SetFloat("speed", direction * direction);  
 
         //changes the direction mario is looking
         if (direction != 0)
             Look();
+
+        if (wasHit)
+            renderer.enabled = !renderer.enabled;
     }
 
     private void FixedUpdate()
@@ -69,6 +77,7 @@ public class MarioScriptNew : MonoBehaviour
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
 
+    //sets look position
     void Look()
     {
         if (direction < 0 && facingRight)
@@ -83,6 +92,7 @@ public class MarioScriptNew : MonoBehaviour
         }
     }
 
+    //tells if the target is an enemy or not
     bool IsEnemy()
     {
         Vector2 position = transform.position - new Vector3(0, 1, 0);
@@ -96,15 +106,31 @@ public class MarioScriptNew : MonoBehaviour
         return false;
     }
 
+    void Hit()
+    {
+        wasHit = true;
+        StartCoroutine(Blink());
+    }
+
+    IEnumerator Blink()
+    {
+        yield return new WaitForSeconds(4);
+        wasHit = false;
+        renderer.enabled = true;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (IsEnemy())
         {
             Debug.Log("enter");
             collision.gameObject.GetComponent<Collider2D>().enabled = false;
-            rb.AddForce(Vector2.up * killPower/3, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * killPower / 3, ForceMode2D.Impulse);
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * killPower, ForceMode2D.Impulse);
+            collision.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
             Destroy(collision.gameObject, 4);
         }
+        else if (collision.gameObject.CompareTag("enemy") && !wasHit)
+            Hit();
     }
 }
