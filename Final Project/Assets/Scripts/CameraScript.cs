@@ -16,7 +16,7 @@ public class CameraScript : MonoBehaviour
 
     void Update()
     {
-        transform.position = transform.position = new Vector3(mario.transform.position.x + offset.x, transform.position.y, transform.position.z);
+        transform.position = transform.position = new Vector3(mario.transform.position.x + offset.x, mario.transform.position.y+offset.y, transform.position.z);
 
     }
 }
