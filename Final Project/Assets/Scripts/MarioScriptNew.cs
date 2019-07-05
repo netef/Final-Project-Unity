@@ -23,6 +23,7 @@ public class MarioScriptNew : MonoBehaviour
     float direction;
     bool facingRight, wasHit;
     AudioSource audio;
+    //BoxCollider2D collider;
 
 
     void Start()
@@ -31,6 +32,7 @@ public class MarioScriptNew : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         audio = GetComponent<AudioSource>();
+        //collider = GetComponent<BoxCollider2D>();
         direction = 0;
         facingRight = true;
         wasHit = false;
@@ -90,7 +92,6 @@ public class MarioScriptNew : MonoBehaviour
             audio.PlayOneShot(JumpSound);
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
-
     }
 
     //sets look position
@@ -167,9 +168,13 @@ public class MarioScriptNew : MonoBehaviour
     }
     void Mushroom(Collision2D collision)
     {
+        Destroy(collision.gameObject);
         audio.PlayOneShot(powerUpSound);
         PlayerPrefs.SetInt("powerUp", 1);
-        Destroy(collision.gameObject);
+        anim.SetLayerWeight(1, 1);
+        collider.size = new Vector2(collider.size.x, collider.size.y * 2);
+        //anim.SetTrigger("Transform");
+
     }
 
     void Flower(Collision2D collision)
