@@ -172,7 +172,7 @@ public class MarioScriptNew : MonoBehaviour
         audio.PlayOneShot(powerUpSound);
         PlayerPrefs.SetInt("powerUp", 1);
         anim.SetLayerWeight(1, 1);
-        collider.size = new Vector2(collider.size.x, collider.size.y * 2);
+        //GetComponent<Collider>().size = new Vector2(GetComponent<Collider>().size.x, GetComponent<Collider>().size.y * 2);
         //anim.SetTrigger("Transform");
 
     }
