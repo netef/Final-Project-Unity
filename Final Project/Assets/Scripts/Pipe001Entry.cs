@@ -20,19 +20,19 @@ public class Pipe001Entry : MonoBehaviour
         {
             if (StoodOn == 1)
             {
-                GameObject.Find("ThirdPersonController").GetComponent("ThirdPersonUserControl") = false;
+          /*      GameObject.Find("ThirdPersonController").GetComponent("ThirdPersonUserControl") = false;
                 transform.position = new Vector3(0, -1000, 0);
-                WaitForPipe();
+                WaitForPipe();*/
             }
         }
     }
 
     private void WaitForPipe()
     {
-        pipeEntry.GetComponent("Animator").enabled = true;
+      /*  pipeEntry.GetComponent("Animator").enabled = true;
         yield return new WaitForSeconds(2);
-        pipeEntry.GetComponent("Animator").enabled = false;
-        GameObject.Find("FPSController").GetComponent("FirstPersonController").enabled = tr;
+        pipeEntry.GetComponent("Animator").enabled = false;*/
+      //  GameObject.Find("FPSController").GetComponent("FirstPersonController").enabled = tr;
 
     }
 
