@@ -19,8 +19,7 @@ public class Pipe001Entry : MonoBehaviour
         {
             if (StoodOn)
             {
-                      GameObject.Find("MaleFreeSimpleMovement1").GetComponent<SimpleCharacterControl>().enabled = false;
-                      transform.position = new Vector3(0, -1000, 0);
+                       transform.position = new Vector3(0, -1000, 0);
                       StartCoroutine(WaitForPipe());                    
             }
         }
