@@ -23,7 +23,9 @@ public class MarioScriptNew : MonoBehaviour
     float direction;
     bool facingRight, wasHit;
     AudioSource audio;
-    //BoxCollider2D collider;
+    CapsuleCollider2D smallCollider;
+    CapsuleCollider2D bigCollider;
+
 
 
     void Start()
@@ -32,7 +34,10 @@ public class MarioScriptNew : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         audio = GetComponent<AudioSource>();
-        //collider = GetComponent<BoxCollider2D>();
+        smallCollider = GetComponent<CapsuleCollider2D>();
+        bigCollider = gameObject.AddComponent<CapsuleCollider2D>();
+        bigCollider.size = new Vector2(0.12f, 0.32f);
+        bigCollider.enabled = false;
         direction = 0;
         facingRight = true;
         wasHit = false;
@@ -71,10 +76,10 @@ public class MarioScriptNew : MonoBehaviour
     //sends a raycast to check if mario is on the ground
     bool IsGrounded()
     {
-        Vector2 position = transform.position;
+        Vector2 position = transform.position - new Vector3(0, renderer.bounds.size.y / 2, 0);
         Vector2 direction = Vector2.down;
         float radius = 0.5f;
-        float distance = 1.0f;
+        float distance = 0.1f;
 
         RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, groundLayer);
         if (hit.collider != null)
@@ -112,10 +117,10 @@ public class MarioScriptNew : MonoBehaviour
     //tells if the target is an enemy or not
     bool IsEnemy()
     {
-        Vector2 position = transform.position - new Vector3(0, 1, 0);
+        Vector2 position = transform.position - new Vector3(0, renderer.bounds.size.y / 2, 0);
         Vector2 direction = Vector2.down;
         float radius = 0.7f;
-        float distance = 2.0f;
+        float distance = 1.0f;
 
         RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, enemyLayer);
         if (hit.collider != null)
@@ -125,11 +130,26 @@ public class MarioScriptNew : MonoBehaviour
 
     bool IsQuestion()
     {
-        Vector2 position = transform.position + new Vector3(0, 1, 0);
-        Vector2 direction = Vector2.up;
+        Vector2 position = transform.position + new Vector3(0, renderer.bounds.size.y / 2, 0);
+        Vector2 direction = Vector2.down;
+        float radius = 0.1f;
         float distance = 0.1f;
 
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance);
+        RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, groundLayer);
+        if (hit.collider != null)
+            if (hit.transform.gameObject.CompareTag("question"))
+                return true;
+        return false;
+    }
+
+    bool IsBreakable()
+    {
+        Vector2 position = transform.position + new Vector3(0, renderer.bounds.size.y / 2, 0);
+        Vector2 direction = Vector2.down;
+        float radius = 0.1f;
+        float distance = 0.1f;
+
+        RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, groundLayer);
         if (hit.collider != null)
             if (hit.transform.gameObject.CompareTag("question"))
                 return true;
@@ -170,11 +190,13 @@ public class MarioScriptNew : MonoBehaviour
     {
         Destroy(collision.gameObject);
         audio.PlayOneShot(powerUpSound);
-        PlayerPrefs.SetInt("powerUp", 1);
-        anim.SetLayerWeight(1, 1);
-        //GetComponent<Collider>().size = new Vector2(GetComponent<Collider>().size.x, GetComponent<Collider>().size.y * 2);
-        //anim.SetTrigger("Transform");
-
+        if (PlayerPrefs.GetInt("powerUp", 0) == 0)
+        {
+            PlayerPrefs.SetInt("powerUp", 1);
+            anim.SetLayerWeight(1, 1);
+            bigCollider.enabled = true;
+            smallCollider.enabled = false;
+        }
     }
 
     void Flower(Collision2D collision)
@@ -193,7 +215,7 @@ public class MarioScriptNew : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (IsEnemy())
+        if (IsEnemy() && !IsGrounded())
             Enemy(collision);
         else if (collision.gameObject.CompareTag("enemy") && !wasHit)
             Hit();
