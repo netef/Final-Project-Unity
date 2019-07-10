@@ -37,6 +37,11 @@ TextureImporter:
     21300064: Mario Sprite Sheet_32
     21300066: Mario Sprite Sheet_33
     21300068: Mario Sprite Sheet_34
+    21300070: Fire Mario Idle
+    21300072: Fire Mario Walk1
+    21300074: Fire Mario Walk2
+    21300076: Fire Mario Walk3
+    21300078: Fire Mario Jump
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -836,6 +841,106 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5d4a5edcb3e2bf349bd0eddc0d9082a1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire Mario Idle
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 526
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c0c8098bda26d949a04f0e143da2fa1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire Mario Walk1
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 526
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f62d85c6f14ff1342a3d8fef9db4d0c9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire Mario Walk2
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 526
+        width: 14
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59f5ba47f20ef4547b1bb052c54ff1e2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire Mario Walk3
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 526
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7028034ad67e4b744a4a3e0843b1beb8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire Mario Jump
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 526
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ca85d4f22d14ec4faf171f0771776b5
       vertices: []
       indices: 
       edges: []

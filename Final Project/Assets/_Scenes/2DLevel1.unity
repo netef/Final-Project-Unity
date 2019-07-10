@@ -137,7 +137,7 @@ PrefabInstance:
     - target: {fileID: 6320308643556421337, guid: f02d027fae7120d4f9ddbc01a40fb715,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.81
+      value: 8.04
       objectReference: {fileID: 0}
     - target: {fileID: 6320308643556421337, guid: f02d027fae7120d4f9ddbc01a40fb715,
         type: 3}
@@ -389,7 +389,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300532, guid: 7068338de2616844789f6b9e960b4c62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -468,7 +468,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300532, guid: 7068338de2616844789f6b9e960b4c62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -547,7 +547,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300534, guid: 7068338de2616844789f6b9e960b4c62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -626,7 +626,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300534, guid: 7068338de2616844789f6b9e960b4c62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -869,7 +869,7 @@ PrefabInstance:
     - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8208747
+      value: 2.8608747
       objectReference: {fileID: 0}
     - target: {fileID: 7512036374512732051, guid: 998ecc811e1a62647b05b90f59b44913,
         type: 3}
@@ -1161,7 +1161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300480, guid: 7068338de2616844789f6b9e960b4c62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1239,7 +1239,6 @@ GameObject:
   - component: {fileID: 1184069439}
   - component: {fileID: 1184069438}
   - component: {fileID: 1184069437}
-  - component: {fileID: 1184069436}
   - component: {fileID: 1184069435}
   - component: {fileID: 1184069440}
   - component: {fileID: 1184069441}
@@ -1271,22 +1270,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &1184069436
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184069434}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.12, y: 0.16}
-  m_Direction: 0
 --- !u!212 &1184069437
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1397,7 +1380,7 @@ MonoBehaviour:
   powerUpSound: {fileID: 8300000, guid: 421c1912f269f8143bb78af3b518ff2e, type: 3}
   JumpSound: {fileID: 8300000, guid: 0f0fa6c334720a1478dce49fe06404c7, type: 3}
   pipeSound: {fileID: 0}
-  jumpPower: 30
+  jumpPower: 35
   velocity: 20
   killPower: 100
 --- !u!82 &1184069441
@@ -1861,7 +1844,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300482, guid: 7068338de2616844789f6b9e960b4c62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

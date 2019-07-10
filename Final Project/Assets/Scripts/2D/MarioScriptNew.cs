@@ -23,8 +23,9 @@ public class MarioScriptNew : MonoBehaviour
     float direction;
     bool facingRight, wasHit;
     AudioSource audio;
-    CapsuleCollider2D smallCollider;
-    CapsuleCollider2D bigCollider;
+    CapsuleCollider2D capsuleCollider;
+    Vector2 small = new Vector2(0.12f, 0.16f);
+    Vector2 big = new Vector2(0.12f, 0.32f);
 
 
 
@@ -34,10 +35,10 @@ public class MarioScriptNew : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         audio = GetComponent<AudioSource>();
-        smallCollider = GetComponent<CapsuleCollider2D>();
-        bigCollider = gameObject.AddComponent<CapsuleCollider2D>();
-        bigCollider.size = new Vector2(0.12f, 0.32f);
-        bigCollider.enabled = false;
+
+        capsuleCollider = gameObject.AddComponent<CapsuleCollider2D>();
+        capsuleCollider.size = small;
+
         direction = 0;
         facingRight = true;
         wasHit = false;
@@ -119,8 +120,8 @@ public class MarioScriptNew : MonoBehaviour
     {
         Vector2 position = transform.position - new Vector3(0, renderer.bounds.size.y / 2, 0);
         Vector2 direction = Vector2.down;
-        float radius = 0.7f;
-        float distance = 1.0f;
+        float radius = 0.1f;
+        float distance = 0.2f;
 
         RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, enemyLayer);
         if (hit.collider != null)
@@ -131,22 +132,8 @@ public class MarioScriptNew : MonoBehaviour
     bool IsQuestion()
     {
         Vector2 position = transform.position + new Vector3(0, renderer.bounds.size.y / 2, 0);
-        Vector2 direction = Vector2.down;
-        float radius = 0.1f;
-        float distance = 0.1f;
-
-        RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, groundLayer);
-        if (hit.collider != null)
-            if (hit.transform.gameObject.CompareTag("question"))
-                return true;
-        return false;
-    }
-
-    bool IsBreakable()
-    {
-        Vector2 position = transform.position + new Vector3(0, renderer.bounds.size.y / 2, 0);
-        Vector2 direction = Vector2.down;
-        float radius = 0.1f;
+        Vector2 direction = Vector2.up;
+        float radius = 0.01f;
         float distance = 0.1f;
 
         RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, groundLayer);
@@ -168,13 +155,14 @@ public class MarioScriptNew : MonoBehaviour
     void Hit()
     {
         wasHit = true;
+        Shrink();
         StartCoroutine(Blink());
     }
 
-    void Question(Collision2D collision)
+    void Question(Collision2D question)
     {
         int rand = Random.Range(0, 2);
-        Vector3 location = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y + 1, collision.gameObject.transform.position.z);
+        Vector3 location = new Vector3(question.gameObject.transform.position.x, question.gameObject.transform.position.y + 1, question.gameObject.transform.position.z);
 
         if (rand == 0)
             Instantiate(coin, location, Quaternion.identity);
@@ -183,8 +171,8 @@ public class MarioScriptNew : MonoBehaviour
             Instantiate(flower, location, Quaternion.identity);
         else
             Instantiate(mushroom, location, Quaternion.identity);
-        collision.gameObject.tag = "hit";
-        collision.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+        question.gameObject.tag = "hit";
+        question.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
     }
     void Mushroom(Collision2D collision)
     {
@@ -194,14 +182,20 @@ public class MarioScriptNew : MonoBehaviour
         {
             PlayerPrefs.SetInt("powerUp", 1);
             anim.SetLayerWeight(1, 1);
-            bigCollider.enabled = true;
-            smallCollider.enabled = false;
+            capsuleCollider.size = big;
         }
     }
 
     void Flower(Collision2D collision)
     {
         audio.PlayOneShot(powerUpSound);
+        //if mario takes the flower when he is small he can revert to medium size when getting hit
+        if (PlayerPrefs.GetInt("PowerUp", 0) == 0)
+        {
+            capsuleCollider.size = big;
+            anim.SetLayerWeight(1, 1);
+        }
+        anim.SetLayerWeight(2, 1);
         PlayerPrefs.SetInt("powerUp", 2);
         Destroy(collision.gameObject);
     }
@@ -211,6 +205,24 @@ public class MarioScriptNew : MonoBehaviour
         yield return new WaitForSeconds(4);
         wasHit = false;
         renderer.enabled = true;
+    }
+
+    void Shrink()
+    {
+        switch (PlayerPrefs.GetInt("powerUp", 0))
+        {
+            case 0:
+                return;
+            case 1:
+                PlayerPrefs.SetInt("powerUp", 0);
+                capsuleCollider.size = small;
+                anim.SetLayerWeight(1, 0);
+                return;
+            case 2:
+                PlayerPrefs.SetInt("powerUp", 1);
+                anim.SetLayerWeight(2, 0);
+                return;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
