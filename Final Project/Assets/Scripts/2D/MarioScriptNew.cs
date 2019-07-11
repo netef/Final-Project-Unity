@@ -21,7 +21,7 @@ public class MarioScriptNew : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer renderer;
     float direction;
-    bool facingRight, wasHit;
+    bool facingRight, wasHit, space;
     AudioSource audio;
     CapsuleCollider2D capsuleCollider;
     Vector2 small = new Vector2(0.12f, 0.16f);
@@ -42,6 +42,7 @@ public class MarioScriptNew : MonoBehaviour
         direction = 0;
         facingRight = true;
         wasHit = false;
+        space = false;
         PlayerPrefs.SetInt("powerUp", 0);
     }
 
@@ -49,7 +50,6 @@ public class MarioScriptNew : MonoBehaviour
     {
         //saves the direction of the input horizontally
         direction = Input.GetAxisRaw("Horizontal");
-
         //sets ground animation
         anim.SetBool("Ground", IsGrounded());
         //changes running and idle animations
@@ -65,6 +65,7 @@ public class MarioScriptNew : MonoBehaviour
         //makes mario jump if he can
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
+
 
     }
 
@@ -93,7 +94,7 @@ public class MarioScriptNew : MonoBehaviour
     {
         if (!IsGrounded())
             return;
-        else
+        else if (IsGrounded())
         {
             audio.PlayOneShot(JumpSound);
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
@@ -120,8 +121,8 @@ public class MarioScriptNew : MonoBehaviour
     {
         Vector2 position = transform.position - new Vector3(0, renderer.bounds.size.y / 2, 0);
         Vector2 direction = Vector2.down;
-        float radius = 0.1f;
-        float distance = 0.2f;
+        float radius = 0.2f;
+        float distance = 0.1f;
 
         RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, enemyLayer);
         if (hit.collider != null)
@@ -154,6 +155,7 @@ public class MarioScriptNew : MonoBehaviour
 
     void Hit()
     {
+        rb.AddForce(Vector2.right * 40 + Vector2.up * 40, ForceMode2D.Impulse);
         wasHit = true;
         Shrink();
         StartCoroutine(Blink());
@@ -227,9 +229,9 @@ public class MarioScriptNew : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (IsEnemy() && !IsGrounded())
+        if (IsEnemy() && !space)
             Enemy(collision);
-        else if (collision.gameObject.CompareTag("enemy") && !wasHit)
+        else if (collision.gameObject.CompareTag("enemy") || collision.gameObject.CompareTag("kill") && !wasHit)
             Hit();
         else if (IsQuestion())
             Question(collision);
