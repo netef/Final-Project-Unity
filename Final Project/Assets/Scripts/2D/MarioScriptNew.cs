@@ -10,6 +10,7 @@ public class MarioScriptNew : MonoBehaviour
     public GameObject coin;
     public GameObject mushroom;
     public GameObject flower;
+    public GameObject fireBall;
     public Sprite sprite;
     public AudioClip powerUpSound;
     public AudioClip JumpSound;
@@ -17,17 +18,16 @@ public class MarioScriptNew : MonoBehaviour
     public float jumpPower;
     public float velocity;
     public float killPower;
+    public bool facingRight, wasHit, space;
+
     Animator anim;
     Rigidbody2D rb;
     SpriteRenderer renderer;
-    float direction;
-    bool facingRight, wasHit, space;
     AudioSource audio;
     CapsuleCollider2D capsuleCollider;
+    float direction;
     Vector2 small = new Vector2(0.12f, 0.16f);
     Vector2 big = new Vector2(0.12f, 0.32f);
-
-
 
     void Start()
     {
@@ -48,6 +48,7 @@ public class MarioScriptNew : MonoBehaviour
 
     void Update()
     {
+
         //saves the direction of the input horizontally
         direction = Input.GetAxisRaw("Horizontal");
         //sets ground animation
@@ -66,7 +67,8 @@ public class MarioScriptNew : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
 
-
+        if (PlayerPrefs.GetInt("powerUp", 0) == 2 && Input.GetKeyDown(KeyCode.Z))
+            FireBall();
     }
 
     private void FixedUpdate()
@@ -75,6 +77,13 @@ public class MarioScriptNew : MonoBehaviour
         rb.velocity = new Vector2(velocity * direction, rb.velocity.y);
     }
 
+    void FireBall()
+    {
+        //creates a fireball infront of mario
+        Vector3 location = new Vector3(transform.position.x, transform.position.y, 0);
+        var ignore = Instantiate(fireBall, transform.position, Quaternion.identity);
+        Physics2D.IgnoreCollision(ignore.GetComponent<CircleCollider2D>(), capsuleCollider);
+    }
     //sends a raycast to check if mario is on the ground
     bool IsGrounded()
     {
@@ -153,9 +162,9 @@ public class MarioScriptNew : MonoBehaviour
         Destroy(collision.gameObject, 4);
     }
 
-    void Hit()
+    void Hit(Collision2D collision)
     {
-        rb.AddForce(Vector2.right * 40 + Vector2.up * 40, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         wasHit = true;
         Shrink();
         StartCoroutine(Blink());
@@ -232,7 +241,7 @@ public class MarioScriptNew : MonoBehaviour
         if (IsEnemy() && !space)
             Enemy(collision);
         else if (collision.gameObject.CompareTag("enemy") || collision.gameObject.CompareTag("kill") && !wasHit)
-            Hit();
+            Hit(collision);
         else if (IsQuestion())
             Question(collision);
         else if (collision.gameObject.CompareTag("mushroom"))

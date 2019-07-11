@@ -32,12 +32,11 @@ public class GoombaScriptNew : MonoBehaviour
     {
         Vector2 position = transform.position + new Vector3(renderer.bounds.size.x / 1.8f * directionMove, 0, 0);
         Vector2 direction = Vector2.right * directionMove;
-        float radius = 0.1f;
+        float radius = 0.05f;
         float distance = 0.1f;
 
         RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance);
-        if (hit.collider != null)
-            if (hit.transform.CompareTag("ground"))
+        if (hit.collider != null && !hit.transform.CompareTag("Player"))
                 return true;
         return false;
     }

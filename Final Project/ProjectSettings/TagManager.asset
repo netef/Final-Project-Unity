@@ -14,6 +14,7 @@ TagManager:
   - kill
   - wall
   - groundcheck
+  - fireball
   layers:
   - Default
   - TransparentFX
