@@ -17,6 +17,7 @@ public class PlayerDeath : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        Application.LoadLevel(0);
         Destroy(GameObject.Find("MaleFreeSimpleMovement1"));
     }
 }
