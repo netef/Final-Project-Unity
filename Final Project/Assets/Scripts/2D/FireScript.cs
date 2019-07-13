@@ -13,7 +13,7 @@ public class FireScript : MonoBehaviour
     {
         counter = 3;
         speed = 25f;
-        mario = GameObject.Find("Mario").GetComponent<MarioScriptNew>();
+        mario = GameObject.Find("Mario2D").GetComponent<MarioScriptNew>();
         rb = GetComponent<Rigidbody2D>();
         if (mario.facingRight)
             direction = 1;
@@ -37,7 +37,7 @@ public class FireScript : MonoBehaviour
             counter--;
         else if (collision.gameObject.CompareTag("fireball"))
             return;
-        else if (collision.gameObject.CompareTag("enemy"))
+        else if (collision.gameObject.CompareTag("enemy") || collision.gameObject.CompareTag("flowerEnemy"))
             Enemy(collision);
         else
             Destroy(gameObject);
@@ -47,6 +47,11 @@ public class FireScript : MonoBehaviour
     {
         collision.gameObject.GetComponent<Collider2D>().enabled = false;
         collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * mario.killPower, ForceMode2D.Impulse);
+        if (collision.gameObject.CompareTag("flowerEnemy"))
+        {
+            collision.gameObject.GetComponent<Rigidbody2D>().gravityScale = 9.8f;
+            collision.gameObject.GetComponent<Animator>().enabled = false;
+        }
         collision.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
         Destroy(collision.gameObject, 4);
     }

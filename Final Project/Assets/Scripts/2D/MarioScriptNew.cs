@@ -183,7 +183,7 @@ public class MarioScriptNew : MonoBehaviour
         else
             Instantiate(mushroom, location, Quaternion.identity);
         question.gameObject.tag = "hit";
-        question.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+        question.gameObject.GetComponent<Animator>().SetLayerWeight(1, 1);
     }
     void Mushroom(Collision2D collision)
     {
@@ -240,7 +240,9 @@ public class MarioScriptNew : MonoBehaviour
     {
         if (IsEnemy() && !space)
             Enemy(collision);
-        else if (collision.gameObject.CompareTag("enemy") || collision.gameObject.CompareTag("kill") && !wasHit)
+        else if (collision.gameObject.CompareTag("enemy") ||
+             collision.gameObject.CompareTag("kill") ||
+             collision.gameObject.CompareTag("flowerEnemy") && !wasHit)
             Hit(collision);
         else if (IsQuestion())
             Question(collision);

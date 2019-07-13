@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - ground
-  - head
   - mushroom
   - question
   - hit
@@ -15,6 +14,7 @@ TagManager:
   - wall
   - groundcheck
   - fireball
+  - flowerEnemy
   layers:
   - Default
   - TransparentFX
