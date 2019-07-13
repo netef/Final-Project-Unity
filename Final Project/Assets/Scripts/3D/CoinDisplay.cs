@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinPickUp : MonoBehaviour
+public class CoinDisplay : MonoBehaviour
 {
+    public GameObject coinDisplay;
+    public static int coinCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,11 +15,6 @@ public class CoinPickUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        transform.position = new Vector3(0, -1000, 0);
-        CoinDisplay.coinCount += 1;
+        coinDisplay.GetComponent<UnityEngine.UI.Text>().text = "Coins : " + coinCount;
     }
 }

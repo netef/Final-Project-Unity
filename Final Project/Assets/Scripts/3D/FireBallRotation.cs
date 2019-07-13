@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinPickUp : MonoBehaviour
+public class FireBallRotation : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,11 +13,6 @@ public class CoinPickUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Rotate(0, 0, -1, Space.World);
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        transform.position = new Vector3(0, -1000, 0);
-        CoinDisplay.coinCount += 1;
-    }
-}
+} 

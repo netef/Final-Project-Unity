@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MushroomManDeath : MonoBehaviour
 {
-    GameObject mushroomMan;
+     public GameObject mushroomMan;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +19,7 @@ public class MushroomManDeath : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(GameObject.Find("MushroomMan001").gameObject);
+        if(mushroomMan!=null)
+        Destroy(mushroomMan);
     }
 }

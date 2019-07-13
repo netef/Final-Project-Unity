@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pipe002 : MonoBehaviour
 {
     bool StoodOn;
-
+    public GameObject mainCam, secCam;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,9 @@ public class Pipe002 : MonoBehaviour
             
             GameObject.Find("MaleFreeSimpleMovement1").GetComponent<SimpleCharacterControl>().enabled = true;
             GameObject.Find("MaleFreeSimpleMovement1").transform.position = new Vector3(31.97f, 6.01f, 11.24f);//(47f, 5.4f   , 12.8f);
+            mainCam.SetActive(true);
+            secCam.SetActive(false);
+
         }
     }
     private void OnTriggerExit(Collider other)

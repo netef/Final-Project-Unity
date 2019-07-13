@@ -17,6 +17,13 @@ public class PlayerDeath : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        GlobalLives.livesAmount -= 1;
+        Application.LoadLevel(0);
+        Destroy(GameObject.Find("MaleFreeSimpleMovement1"));
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        GlobalLives.livesAmount -= 1;
         Application.LoadLevel(0);
         Destroy(GameObject.Find("MaleFreeSimpleMovement1"));
     }

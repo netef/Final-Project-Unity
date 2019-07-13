@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraScript3D : MonoBehaviour
 {
     public GameObject mario;
-    private Vector3 offset;
+    private Vector3 offset = new Vector3(3f,0,0);
     void Start()
     {
         offset = transform.position - mario.transform.position;
