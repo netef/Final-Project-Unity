@@ -15,6 +15,7 @@ TagManager:
   - groundcheck
   - fireball
   - flowerEnemy
+  - breakable
   layers:
   - Default
   - TransparentFX

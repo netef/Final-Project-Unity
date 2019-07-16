@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MarioScriptNew : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class MarioScriptNew : MonoBehaviour
     public float velocity;
     public float killPower;
     public bool facingRight, wasHit, space;
+    public GameObject mainCamera;
+    public GameObject secretCamera;
+    public Transform secretLocation;
+    public GameObject death;
 
     Animator anim;
     Rigidbody2D rb;
@@ -48,7 +53,6 @@ public class MarioScriptNew : MonoBehaviour
 
     void Update()
     {
-
         //saves the direction of the input horizontally
         direction = Input.GetAxisRaw("Horizontal");
         //sets ground animation
@@ -130,7 +134,7 @@ public class MarioScriptNew : MonoBehaviour
     {
         Vector2 position = transform.position - new Vector3(0, renderer.bounds.size.y / 2, 0);
         Vector2 direction = Vector2.down;
-        float radius = 0.2f;
+        float radius = 0.3f;
         float distance = 0.1f;
 
         RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, enemyLayer);
@@ -143,12 +147,26 @@ public class MarioScriptNew : MonoBehaviour
     {
         Vector2 position = transform.position + new Vector3(0, renderer.bounds.size.y / 2, 0);
         Vector2 direction = Vector2.up;
-        float radius = 0.01f;
-        float distance = 0.1f;
+        float radius = 0.1f;
+        float distance = 0.01f;
 
         RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, groundLayer);
         if (hit.collider != null)
             if (hit.transform.gameObject.CompareTag("question"))
+                return true;
+        return false;
+    }
+
+    bool IsDestructible()
+    {
+        Vector2 position = transform.position + new Vector3(0, renderer.bounds.size.y / 2, 0);
+        Vector2 direction = Vector2.up;
+        float radius = 0.1f;
+        float distance = 0.01f;
+
+        RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, groundLayer);
+        if (hit.collider != null)
+            if (hit.transform.gameObject.CompareTag("breakable"))
                 return true;
         return false;
     }
@@ -159,6 +177,7 @@ public class MarioScriptNew : MonoBehaviour
         rb.AddForce(Vector2.up * killPower / 3, ForceMode2D.Impulse);
         collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * killPower, ForceMode2D.Impulse);
         collision.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
+        Instantiate(death, collision.transform.position, Quaternion.identity);
         Destroy(collision.gameObject, 4);
     }
 
@@ -211,12 +230,7 @@ public class MarioScriptNew : MonoBehaviour
         Destroy(collision.gameObject);
     }
 
-    IEnumerator Blink()
-    {
-        yield return new WaitForSeconds(4);
-        wasHit = false;
-        renderer.enabled = true;
-    }
+
 
     void Shrink()
     {
@@ -236,7 +250,33 @@ public class MarioScriptNew : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void Pipe(Collider2D collision)
+    {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            collision.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+            wasHit = true;
+            StartCoroutine(cameraChange());
+        }
+    }
+
+    IEnumerator Blink()
+    {
+        yield return new WaitForSeconds(4);
+        wasHit = false;
+        renderer.enabled = true;
+    }
+
+    IEnumerator cameraChange()
+    {
+        yield return new WaitForSeconds(0.5f);
+        mainCamera.SetActive(!mainCamera.activeSelf);
+        secretCamera.SetActive(!secretCamera.activeSelf);
+        transform.position = secretLocation.position;
+        wasHit = false;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (IsEnemy() && !space)
             Enemy(collision);
@@ -246,9 +286,17 @@ public class MarioScriptNew : MonoBehaviour
             Hit(collision);
         else if (IsQuestion())
             Question(collision);
+        else if (IsDestructible() && PlayerPrefs.GetInt("powerUp", 0) > 0)
+            Destroy(collision.gameObject);
         else if (collision.gameObject.CompareTag("mushroom"))
             Mushroom(collision);
         else if (collision.gameObject.CompareTag("flower"))
             Flower(collision);
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+            Pipe(collision);
     }
 }
