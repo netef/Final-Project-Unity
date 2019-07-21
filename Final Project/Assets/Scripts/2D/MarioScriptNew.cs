@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MarioScriptNew : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class MarioScriptNew : MonoBehaviour
     float direction;
     Vector2 small = new Vector2(0.12f, 0.16f);
     Vector2 big = new Vector2(0.12f, 0.32f);
+    Vector3 normalPosition;
+    bool exit;
 
     void Start()
     {
@@ -48,6 +51,7 @@ public class MarioScriptNew : MonoBehaviour
         facingRight = true;
         wasHit = false;
         space = false;
+        exit = false;
         PlayerPrefs.SetInt("powerUp", 0);
     }
 
@@ -134,7 +138,7 @@ public class MarioScriptNew : MonoBehaviour
     {
         Vector2 position = transform.position - new Vector3(0, renderer.bounds.size.y / 2, 0);
         Vector2 direction = Vector2.down;
-        float radius = 0.3f;
+        float radius = 0.5f;
         float distance = 0.1f;
 
         RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, enemyLayer);
@@ -147,7 +151,7 @@ public class MarioScriptNew : MonoBehaviour
     {
         Vector2 position = transform.position + new Vector3(0, renderer.bounds.size.y / 2, 0);
         Vector2 direction = Vector2.up;
-        float radius = 0.1f;
+        float radius = 0.05f;
         float distance = 0.01f;
 
         RaycastHit2D hit = Physics2D.CircleCast(position, radius, direction, distance, groundLayer);
@@ -179,6 +183,7 @@ public class MarioScriptNew : MonoBehaviour
         collision.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
         Instantiate(death, collision.transform.position, Quaternion.identity);
         Destroy(collision.gameObject, 4);
+        PlayerPrefs.SetInt("Score2D", PlayerPrefs.GetInt("Score2D", 0) + 100);
     }
 
     void Hit(Collision2D collision)
@@ -237,6 +242,7 @@ public class MarioScriptNew : MonoBehaviour
         switch (PlayerPrefs.GetInt("powerUp", 0))
         {
             case 0:
+                GameOver();
                 return;
             case 1:
                 PlayerPrefs.SetInt("powerUp", 0);
@@ -250,14 +256,35 @@ public class MarioScriptNew : MonoBehaviour
         }
     }
 
-    void Pipe(Collider2D collision)
+    void Pipe1(Collider2D collision)
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            normalPosition = transform.position;
             collision.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
             wasHit = true;
-            StartCoroutine(cameraChange());
+            StartCoroutine(cameraChange(secretLocation.position));
         }
+    }
+
+    void Pipe2(Collider2D collision)
+    {
+        if (!exit)
+        {
+            exit = true;
+            wasHit = true;
+            StartCoroutine(cameraChange(normalPosition));
+        }
+    }
+
+    void Castle()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    void GameOver()
+    {
+        SceneManager.LoadScene(4);
     }
 
     IEnumerator Blink()
@@ -267,12 +294,12 @@ public class MarioScriptNew : MonoBehaviour
         renderer.enabled = true;
     }
 
-    IEnumerator cameraChange()
+    IEnumerator cameraChange(Vector3 pos)
     {
         yield return new WaitForSeconds(0.5f);
         mainCamera.SetActive(!mainCamera.activeSelf);
         secretCamera.SetActive(!secretCamera.activeSelf);
-        transform.position = secretLocation.position;
+        transform.position = pos;
         wasHit = false;
     }
 
@@ -297,6 +324,10 @@ public class MarioScriptNew : MonoBehaviour
     void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("ground"))
-            Pipe(collision);
+            Pipe1(collision);
+        else if (collision.gameObject.CompareTag("exitPipe"))
+            Pipe2(collision);
+        else if (collision.gameObject.CompareTag("castle"))
+            Castle();
     }
 }

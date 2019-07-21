@@ -16,6 +16,8 @@ TagManager:
   - fireball
   - flowerEnemy
   - breakable
+  - exitPipe
+  - castle
   layers:
   - Default
   - TransparentFX
@@ -28,8 +30,8 @@ TagManager:
   - Ground
   - Enemy
   - Question
-  - 
-  - 
+  - Player
+  - Collectibles
   - 
   - 
   - 

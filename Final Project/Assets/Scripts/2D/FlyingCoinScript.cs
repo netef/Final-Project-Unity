@@ -8,11 +8,12 @@ public class FlyingCoinScript : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, 0.3f);
+        PlayerPrefs.SetInt("Coins2D", PlayerPrefs.GetInt("Coins2D", 0) + 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.up * 5 * Time.deltaTime); 
+        transform.Translate(Vector3.up * 5 * Time.deltaTime);
     }
 }
