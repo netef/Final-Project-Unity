@@ -211,6 +211,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a10ba2bfcbb28e40aaa6163911f15c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mushroomMan: {fileID: 0}
+  material: {fileID: 2100000, guid: d57e88a84e16f2e408ff16016faa5896, type: 2}
+  cubeSize: 0.2
+  cubesInRow: 5
+  explosionForce: 50
+  explosionRadius: 4
+  explosionUpward: 0.4
 --- !u!1 &8803992812347454014
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +463,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomMan
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 781c080edfae10e4eae287cf5daba4e9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b89975e80a081d54c9408baae6718caa, type: 2}
     - target: {fileID: 400002, guid: 781c080edfae10e4eae287cf5daba4e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.12727217
@@ -512,10 +523,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.011818189
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 781c080edfae10e4eae287cf5daba4e9, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: b89975e80a081d54c9408baae6718caa, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 781c080edfae10e4eae287cf5daba4e9, type: 3}
 --- !u!4 &8803992812025509193 stripped

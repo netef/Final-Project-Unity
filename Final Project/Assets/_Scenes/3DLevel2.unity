@@ -31678,7 +31678,7 @@ Transform:
   m_GameObject: {fileID: 698514214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 43.89, y: 1, z: 12.6}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 120, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 28
@@ -66386,12 +66386,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8803992811763366268, guid: 9bfe083af782d4e42bbd5b134a766a4d,
+    - target: {fileID: 8803992812027279275, guid: 9bfe083af782d4e42bbd5b134a766a4d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bf60d1b83e16ee84e9588730f161a1c3, type: 2}
-    - target: {fileID: 8803992812027279275, guid: 9bfe083af782d4e42bbd5b134a766a4d,
+    - target: {fileID: 8803992811763366268, guid: 9bfe083af782d4e42bbd5b134a766a4d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -84339,6 +84339,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomMan001 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8803992811763366265, guid: 9bfe083af782d4e42bbd5b134a766a4d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8803992811763366266, guid: 9bfe083af782d4e42bbd5b134a766a4d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -84394,16 +84399,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8803992811763366267, guid: 9bfe083af782d4e42bbd5b134a766a4d,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8803992811763366270, guid: 9bfe083af782d4e42bbd5b134a766a4d,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8803992812546597988, guid: 9bfe083af782d4e42bbd5b134a766a4d,
         type: 3}
       propertyPath: m_Enabled
@@ -84419,6 +84414,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bf60d1b83e16ee84e9588730f161a1c3, type: 2}
+    - target: {fileID: 8803992811763366267, guid: 9bfe083af782d4e42bbd5b134a766a4d,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803992811763366270, guid: 9bfe083af782d4e42bbd5b134a766a4d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8803992811889634180, guid: 9bfe083af782d4e42bbd5b134a766a4d,
         type: 3}
       propertyPath: mushroomMan
