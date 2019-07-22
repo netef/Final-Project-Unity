@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1109757512894091451}
   - component: {fileID: 1109757512894091456}
   - component: {fileID: 1109757512894091457}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Mario2D
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -160,6 +160,10 @@ MonoBehaviour:
   facingRight: 0
   wasHit: 0
   space: 0
+  mainCamera: {fileID: 0}
+  secretCamera: {fileID: 0}
+  secretLocation: {fileID: 0}
+  death: {fileID: 3488403574372472805, guid: 606a26306686d3f4990f2dc3170ac13b, type: 3}
 --- !u!82 &1109757512894091457
 AudioSource:
   m_ObjectHideFlags: 0

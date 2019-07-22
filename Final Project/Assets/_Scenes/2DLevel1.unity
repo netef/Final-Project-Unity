@@ -20476,11 +20476,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mario2D
       objectReference: {fileID: 0}
-    - target: {fileID: 1109757512894091450, guid: 0980248ecc3984e4799d54c5721f182b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 1109757512894091455, guid: 0980248ecc3984e4799d54c5721f182b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20538,25 +20533,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1109757512894091456, guid: 0980248ecc3984e4799d54c5721f182b,
         type: 3}
-      propertyPath: secretCamera
-      value: 
-      objectReference: {fileID: 819092061}
-    - target: {fileID: 1109757512894091456, guid: 0980248ecc3984e4799d54c5721f182b,
-        type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420028}
     - target: {fileID: 1109757512894091456, guid: 0980248ecc3984e4799d54c5721f182b,
         type: 3}
+      propertyPath: secretCamera
+      value: 
+      objectReference: {fileID: 819092061}
+    - target: {fileID: 1109757512894091456, guid: 0980248ecc3984e4799d54c5721f182b,
+        type: 3}
       propertyPath: secretLocation
       value: 
       objectReference: {fileID: 744324576}
-    - target: {fileID: 1109757512894091456, guid: 0980248ecc3984e4799d54c5721f182b,
-        type: 3}
-      propertyPath: death
-      value: 
-      objectReference: {fileID: 3488403574372472805, guid: 606a26306686d3f4990f2dc3170ac13b,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0980248ecc3984e4799d54c5721f182b, type: 3}
 --- !u!1001 &6751800523158302819
