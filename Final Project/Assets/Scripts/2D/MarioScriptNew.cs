@@ -57,16 +57,8 @@ public class MarioScriptNew : MonoBehaviour
 
     void Update()
     {
-        //saves the direction of the input horizontally
-        direction = Input.GetAxisRaw("Horizontal");
-        //sets ground animation
-        anim.SetBool("Ground", IsGrounded());
-        //changes running and idle animations
-        anim.SetFloat("speed", direction * direction);
 
-        //changes the direction mario is looking
-        if (direction != 0)
-            Look();
+        Movement();
 
         if (wasHit)
             renderer.enabled = !renderer.enabled;
@@ -84,7 +76,19 @@ public class MarioScriptNew : MonoBehaviour
         //moves mario
         rb.velocity = new Vector2(velocity * direction, rb.velocity.y);
     }
+    void Movement()
+    {
+        //saves the direction of the input horizontally
+        direction = Input.GetAxisRaw("Horizontal");
+        //sets ground animation
+        anim.SetBool("Ground", IsGrounded());
+        //changes running and idle animations
+        anim.SetFloat("speed", direction * direction);
 
+        //changes the direction mario is looking
+        if (direction != 0)
+            Look();
+    }
     void FireBall()
     {
         //creates a fireball infront of mario

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossEnterScript : MonoBehaviour
 {
-    public GameObject wall1, wall2, mario, mainCamera, bossCamera;
+    public GameObject wall1, wall2, mario,boss, mainCamera, bossCamera;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,6 +25,7 @@ public class BossEnterScript : MonoBehaviour
         yield return new WaitForSeconds(5);
         mario.GetComponent<MarioScriptNew>().enabled = true;
         mario.GetComponent<Animator>().enabled = true;
+        boss.SetActive(true);
         Destroy(gameObject);
     }
 }

@@ -18,6 +18,7 @@ TagManager:
   - breakable
   - exitPipe
   - castle
+  - side
   layers:
   - Default
   - TransparentFX

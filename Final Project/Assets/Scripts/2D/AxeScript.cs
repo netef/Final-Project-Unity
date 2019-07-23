@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AxeScript : MonoBehaviour
 {
@@ -24,7 +25,16 @@ public class AxeScript : MonoBehaviour
         mario.GetComponent<Animator>().enabled = false;
         mario.GetComponent<MarioScriptNew>().enabled = false;
         boss.GetComponent<BossScript>().enabled = false;
+        boss.GetComponent<Collider2D>().enabled = false;
         Destroy(bridge);
+        Destroy(boss, 3);
+        StartCoroutine(Wait());
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadSceneAsync(5, LoadSceneMode.Single);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
