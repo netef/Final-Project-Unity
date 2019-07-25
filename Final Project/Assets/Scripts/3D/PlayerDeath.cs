@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
@@ -18,13 +19,31 @@ public class PlayerDeath : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GlobalLives.livesAmount -= 1;
-        Application.LoadLevel(0);
-        Destroy(GameObject.Find("MaleFreeSimpleMovement1"));
+        if (GlobalLives.livesAmount == 0)
+        {
+            SceneManager.LoadScene(4, LoadSceneMode.Single);
+
+        }
+        else
+        {
+            SceneManager.LoadScene(2, LoadSceneMode.Single);
+
+
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
         GlobalLives.livesAmount -= 1;
-        Application.LoadLevel(0);
-        Destroy(GameObject.Find("MaleFreeSimpleMovement1"));
+        if(GlobalLives.livesAmount == 0)
+        {
+            SceneManager.LoadScene(5, LoadSceneMode.Single);
+            
+        }
+        else
+        {
+            SceneManager.LoadScene(5, LoadSceneMode.Single);
+   
+
+        }
     }
 }

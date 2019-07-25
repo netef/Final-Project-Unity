@@ -17,6 +17,6 @@ public class GlobalLives : MonoBehaviour
     void Update()
     {
         internalLives = livesAmount;
-        lifeTextBox.GetComponent<UnityEngine.UI.Text>().text = "" + internalLives;
+        lifeTextBox.GetComponent<UnityEngine.UI.Text>().text =  "Life :" + internalLives;
     }
 }
