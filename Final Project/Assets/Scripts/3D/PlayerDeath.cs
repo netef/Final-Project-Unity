@@ -34,7 +34,7 @@ public class PlayerDeath : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GlobalLives.livesAmount -= 1;
-        if(GlobalLives.livesAmount == 0)
+        if(GlobalLives.livesAmount <= 0)
         {
             SceneManager.LoadScene(5, LoadSceneMode.Single);
             
