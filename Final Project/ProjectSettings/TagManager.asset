@@ -19,6 +19,7 @@ TagManager:
   - exitPipe
   - castle
   - side
+  - death
   layers:
   - Default
   - TransparentFX

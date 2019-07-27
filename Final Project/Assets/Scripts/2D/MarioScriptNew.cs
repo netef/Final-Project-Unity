@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MarioScriptNew : MonoBehaviour
 {
@@ -323,6 +323,8 @@ public class MarioScriptNew : MonoBehaviour
             Mushroom(collision);
         else if (collision.gameObject.CompareTag("flower"))
             Flower(collision);
+        else if (collision.gameObject.CompareTag("death"))
+            GameOver();
     }
 
     void OnTriggerStay2D(Collider2D collision)
